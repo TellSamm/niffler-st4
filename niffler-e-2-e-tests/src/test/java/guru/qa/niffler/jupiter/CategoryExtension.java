@@ -37,9 +37,7 @@ public class CategoryExtension implements BeforeEachCallback, ParameterResolver 
 
     @Override
     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-        return parameterContext.getParameter()
-                .getType()
-                .isAssignableFrom(CategoryJson.class);
+        return extensionContext.getStore(NAMESPACE).get("category", CategoryJson.class);
     }
 
 
