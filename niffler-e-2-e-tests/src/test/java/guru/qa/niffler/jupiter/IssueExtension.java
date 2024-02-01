@@ -50,4 +50,8 @@ public class IssueExtension implements ExecutionCondition {
     }
     return ConditionEvaluationResult.enabled("Annotation not found");
   }
+
+  public ConditionEvaluationResult myTest (ExtensionContext context){
+    return ConditionEvaluationResult.disabled("test");
+  }
 }
