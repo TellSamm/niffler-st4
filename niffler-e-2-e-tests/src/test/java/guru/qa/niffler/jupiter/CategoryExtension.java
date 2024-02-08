@@ -29,19 +29,6 @@ public class CategoryExtension implements BeforeEachCallback, ParameterResolver 
     private final CategoryApi categoryApi = RETROFIT.create(CategoryApi.class);
 
     @Override
-    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-        return parameterContext.getParameter()
-                .getType()
-                .isAssignableFrom(CategoryJson.class);
-    }
-
-    @Override
-    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-        return extensionContext.getStore(NAMESPACE).get("category", CategoryJson.class);
-    }
-
-
-    @Override
     public void beforeEach(ExtensionContext extensionContext) throws Exception {
         Optional<GenerateCategory> category = AnnotationSupport.findAnnotation(
                 extensionContext.getRequiredTestMethod(),
@@ -61,4 +48,17 @@ public class CategoryExtension implements BeforeEachCallback, ParameterResolver 
         }
 
     }
+
+    @Override
+    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        return parameterContext.getParameter()
+                .getType()
+                .isAssignableFrom(CategoryJson.class);
+    }
+
+    @Override
+    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        return extensionContext.getStore(NAMESPACE).get("category", CategoryJson.class);
+    }
+
 }
